@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: udaconnect-persons
+  name: udaconnect-persons
+spec:
+  ports:
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
+    nodePort: 30010
+  selector:
+    service: udaconnect-persons
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  lebels:
+    service: udaconnect-persons
+  name: udaconnect-persons
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udaconnect-persons
+  template:
+    metadata:
+      labels:
+        service: udaconnect-persons
+    spec:
+      containers:
+      - image: xeusteerapat/udaconnect-persons:latest
+        name: persons
+        imagePullPolicy: Always
+        resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 410m
+              memory: 512Mi
+        env: # refer to config.py file
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-env
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-env
+              key: DB_NAME
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: db-env
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-env
+              key: DB_PORT
+        restartPolicy: Always
+        
