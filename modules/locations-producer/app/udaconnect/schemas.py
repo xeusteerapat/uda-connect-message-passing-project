@@ -11,3 +11,7 @@ class LocationSchema(Schema):
 
     class Meta:
         model = Location
+
+
+class ConnectionSchema(Schema):
+    location = fields.Nested(LocationSchema)
