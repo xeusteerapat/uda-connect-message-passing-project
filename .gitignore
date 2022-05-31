@@ -163,3 +163,4 @@ k3s.yaml
 kube.backup.yaml
 .DS_Store
 .vagrant
+0_ref
