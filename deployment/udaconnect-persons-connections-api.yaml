@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - image: xeusteerapat/udaconnect-person-connections-api:latest
-        name: persons
+        name: udaconnect-person-connections-api
         imagePullPolicy: Always
         resources:
             requests:
