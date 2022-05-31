@@ -41,6 +41,14 @@ spec:
             limits:
               cpu: 410m
               memory: 512Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
         env: # refer to config.py file
         - name: DB_USERNAME
           valueFrom:
