@@ -7,6 +7,6 @@ message PersonsMessage {
   string company_name = 4;
 }
 
-service CallService {
+service PersonService {
   rpc Create(PersonsMessage) returns (PersonsMessage);
 }
