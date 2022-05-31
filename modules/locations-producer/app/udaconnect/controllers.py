@@ -1,60 +1,33 @@
-from flask import request
-from flask_accepts import accepts, responds
-from flask_restx import Namespace, Resource, fields
-
-from app.udaconnect.models.location import Location
-from app.udaconnect.schemas import LocationSchema
+from app.udaconnect.models import Location
 from app.udaconnect.services import LocationService
+from flask_restx import Namespace, Resource
+from flask import request
+
 
 DATE_FORMAT = "%Y-%m-%d"
 
-api = Namespace("UdaConnect - Location API", description="Create location data")  # noqa
+api = Namespace("UdaConnect", description="Persons Connections via geolocation.")  # noqa
 
-location_response = api.model("Location", {
-    "id": fields.Integer,
-    "person_id": fields.Integer,
-    "longitude": fields.String,
-    "latitude": fields.String,
-    "creation_time": fields.DateTime
-})
+
+# TODO: This needs better exception handling
 
 
 @api.route("/locations")
-class LocationListResources(Resource):
-    @accepts(schema=LocationSchema)
-    @api.doc(
-        description="Create a new location",
-        body=location_response,
-        responses={
-            202: "Location creation accepted",
-            500: "Internal Server Error"
-        }
-    )
-    def post(self):
-        location: Location = request.get_json()
-
-        LocationService.create(location)
-
-        return {
-            "status": "accepted"
-        }, 202
-
-
 @api.route("/locations/<location_id>")
-@api.params("location_id", "Unique ID for a given Location", _in="query")
+@api.param("location_id", "Unique ID for a given Location", _in="query")
 class LocationResource(Resource):
-    @responds(schema=LocationSchema)
-    @api.doc(
-        description="Get location by given location_id",
-        params={
-            "location_id": "location id is required"
-        },
-        responses={
-            404: "Location Not Found",
-            500: "Internal Server Error"
+    def post(self) -> Location:
+        payload = {
+            'person_id': request.args.get('person_id'),
+            'creation_time': request.args.get('creation_time'),
+            'latitude': request.args.get('latitude'),
+            'longitude': request.args.get('longitude')
         }
-    )
-    @api.response(200, "Location found", location_response)
+
+        location: Location = LocationService.create(payload)
+
+        return location
+
     def get(self, location_id) -> Location:
         location: Location = LocationService.retrieve(location_id)
         return location
