@@ -67,4 +67,4 @@ spec:
             configMapKeyRef:
               name: db-env
               key: DB_PORT
-        restartPolicy: Always
+      restartPolicy: Always

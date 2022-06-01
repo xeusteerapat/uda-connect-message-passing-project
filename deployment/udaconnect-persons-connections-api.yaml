@@ -17,7 +17,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  lebels:
+  labels:
     service: udaconnect-person-connections-api
   name: udaconnect-person-connections-api
 spec:
@@ -75,5 +75,5 @@ spec:
             configMapKeyRef:
               name: db-env
               key: DB_PORT
-        restartPolicy: Always
+      restartPolicy: Always
         
