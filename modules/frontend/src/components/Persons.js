@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import Connection from "./Connection";
+import React, { Component } from 'react';
+import Connection from './Connection';
 
 class Persons extends Component {
   constructor(props) {
     super(props);
     // TODO: endpoint should be abstracted into a config variable
-    this.endpoint_url = "http://localhost:30001/api/persons";
+    this.endpoint_url = 'http://localhost:30010/api/persons';
     this.state = {
       persons: [],
       display: null,
@@ -14,11 +14,11 @@ class Persons extends Component {
 
   componentDidMount() {
     fetch(this.endpoint_url)
-      .then((response) => response.json())
-      .then((data) => this.setState({ persons: data }));
+      .then(response => response.json())
+      .then(data => this.setState({ persons: data }));
   }
 
-  setDisplay = (personId) => {
+  setDisplay = personId => {
     this.setState({
       persons: this.state.persons,
       display: personId,
@@ -27,11 +27,11 @@ class Persons extends Component {
 
   render() {
     return (
-      <div className="lists">
-        <div className="peopleBox">
-          <div className="peopleHeader">People</div>
-          <ul className="personList">
-            {this.state.persons.map((person) => (
+      <div className='lists'>
+        <div className='peopleBox'>
+          <div className='peopleHeader'>People</div>
+          <ul className='personList'>
+            {this.state.persons.map(person => (
               <li
                 key={person.id}
                 onClick={() => {
@@ -39,15 +39,15 @@ class Persons extends Component {
                 }}
                 className={
                   this.state.display === person.id
-                    ? "selectedPerson"
-                    : "personListItem"
+                    ? 'selectedPerson'
+                    : 'personListItem'
                 }
               >
-                <div className="person">
+                <div className='person'>
                   {person.first_name} {person.last_name}
                 </div>
                 <div>
-                  Company: <strong>{person.company_name}</strong>{" "}
+                  Company: <strong>{person.company_name}</strong>{' '}
                 </div>
               </li>
             ))}
