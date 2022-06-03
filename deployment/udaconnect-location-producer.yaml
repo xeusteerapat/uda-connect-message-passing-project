@@ -57,7 +57,7 @@ spec:
               key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: db-secret
               key: DB_PASSWORD
         - name: DB_NAME
