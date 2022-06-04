@@ -54,3 +54,11 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: xeusteerapat/udaconnect-persons-locations-consumer:latest
+      - name: Build and push UdaConnect Frontend Docker images
+        uses: docker/build-push-action@v2.10.0
+        with:
+          context: ./modules/frontend
+          file: ./modules/frontend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: xeusteerapat/udaconnect-frontend:latest
