@@ -6,10 +6,10 @@ metadata:
   name: udaconnect-locations-consumer
 spec:
   ports:
-    - name: "9093"
-      port: 9093
-      targetPort: 9093
-      nodePort: 30040
+  - name: "9093"
+    port: 9093
+    targetPort: 9093
+    nodePort: 30040
   selector:
     service: udaconnect-locations-consumer
   type: NodePort
