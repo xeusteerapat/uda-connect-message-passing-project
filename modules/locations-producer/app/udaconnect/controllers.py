@@ -1,4 +1,4 @@
-from app.udaconnect.models import Location
+from app.udaconnect.models.location import Location
 from app.udaconnect.services import LocationService
 from flask_restx import Namespace, Resource
 from flask import request
