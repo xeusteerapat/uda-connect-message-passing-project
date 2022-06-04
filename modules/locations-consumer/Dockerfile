@@ -9,7 +9,7 @@ COPY requirements.txt /backend/requirements.txt
 RUN pip install --upgrade pip && \
   pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 9093
 
 COPY . .
 

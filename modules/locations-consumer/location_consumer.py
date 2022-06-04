@@ -4,7 +4,8 @@ from kafka import KafkaConsumer
 import time
 
 TOPIC_NAME = "location-processing"
-KAFKA_SERVER = 'kafka.default.svc.cluster.local:9092'
+# KAFKA_SERVER = 'kafka.default.svc.cluster.local:9093'
+KAFKA_SERVER = 'localhost:9093'
 print('Listening to topic:' + TOPIC_NAME)
 
 DB_USERNAME = os.environ["DB_USERNAME"]
