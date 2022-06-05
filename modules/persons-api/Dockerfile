@@ -2,9 +2,9 @@ FROM python:3.9-slim
 
 WORKDIR .
 
-RUN apk add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev
+RUN apt add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev
 
-COPY requirements.txt /backend/requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && \
   pip install -r requirements.txt
 
