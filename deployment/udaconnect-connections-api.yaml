@@ -6,9 +6,9 @@ metadata:
   name: udaconnect-connections-api
 spec:
   ports:
-  - name: "5002"
-    port: 5002
-    targetPort: 5002
+  - name: "5000"
+    port: 5000
+    targetPort: 5000
     nodePort: 30030
   selector:
     service: udaconnect-connections-api
