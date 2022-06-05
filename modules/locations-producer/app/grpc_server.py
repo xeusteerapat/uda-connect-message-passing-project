@@ -27,7 +27,7 @@ class LocationServicer(locations_pb2_grpc.LocationServiceServicer):
 time.sleep(15)
 
 TOPIC_NAME = "location-processing"
-KAFKA_SERVER = 'localhost:9093'
+KAFKA_SERVER = 'kafka-0.default.svc.cluster.local:9092'
 
 print("Connecting to Kafka server: " + KAFKA_SERVER)
 print("Sending message Kafka topic: " + TOPIC_NAME)

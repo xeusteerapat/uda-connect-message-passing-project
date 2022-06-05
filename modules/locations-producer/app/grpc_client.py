@@ -7,7 +7,7 @@ import time
 # Assume sending of coordinates personal device
 print("Sending coordinates")
 
-channel = grpc.insecure_channel("localhost:9093")
+channel = grpc.insecure_channel("localhost:5000")
 stub = locations_pb2_grpc.LocationServiceStub(channel)
 
 # Update this with desired payload
