@@ -22,38 +22,38 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_TOKEN}}
-      - name: Build and push gRPC server Docker images
+      - name: Build and push Persons API Docker images
         uses: docker/build-push-action@v2.10.0
         with:
-          context: ./modules/grpc_server
-          file: ./modules/grpc_server/Dockerfile
+          context: ./modules/persons-api
+          file: ./modules/persons-api/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: xeusteerapat/udaconnect-grpc-server:latest
-      - name: Build and push location producer Docker images
+          tags: xeusteerapat/udaconnect-person-api:latest
+      - name: Build and push Location producer Docker images
         uses: docker/build-push-action@v2.10.0
         with:
           context: ./modules/locations-producer
           file: ./modules/locations-producer/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: xeusteerapat/udaconnect-location-producer:latest
-      - name: Build and push persons connection API Docker images
+          tags: xeusteerapat/udaconnect-locations-producer:latest
+      - name: Build and push Location consumer Docker images
         uses: docker/build-push-action@v2.10.0
         with:
-          context: ./modules/persons-connection
-          file: ./modules/persons-connection/Dockerfile
+          context: ./modules/locations-consumer
+          file: ./modules/locations-consumer/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: xeusteerapat/udaconnect-person-connections-api:latest
-      - name: Build and push persons locations consumer Docker images
+          tags: xeusteerapat/udaconnect-locations-consumer:latest
+      - name: Build and push Connections API Docker images
         uses: docker/build-push-action@v2.10.0
         with:
-          context: ./modules/persons-locations-consumer
-          file: ./modules/persons-locations-consumer/Dockerfile
+          context: ./modules/connections-api
+          file: ./modules/connections-api/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: xeusteerapat/udaconnect-persons-locations-consumer:latest
+          tags: xeusteerapat/udaconnect-connections-api:latest
       - name: Build and push UdaConnect Frontend Docker images
         uses: docker/build-push-action@v2.10.0
         with:
