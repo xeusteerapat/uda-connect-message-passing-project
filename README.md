@@ -1,4 +1,37 @@
 # UdaConnect
+
+## Submision
+
+### Steps
+
+1. `kubectl apply -f deployment/db-configmap.yaml` - Set up environment variables for the pods
+2. `kubectl apply -f deployment/db-secret.yaml` - Set up secrets for the pods
+3. `kubectl apply -f deployment/postgres.yaml` - Set up a Postgres database running PostGIS
+4. `kubectl apply -f deployment/kafka.yaml` - Set up a Kafka message broker
+5. `kubectl apply -f deployment/udaconnect-persons-api.yaml` - Set up the service and deployment for the Persons API
+6. `kubectl apply -f deployment/udaconnect-locations-producer.yaml` - Set up the service and deployment for the Locations producer
+7. `kubectl apply -f deployment/udaconnect-locations-consumer.yaml` - Set up the service and deployment for the Locations consumer
+8. `kubectl apply -f deployment/udaconnect-connections-api.yaml` - Set up the service and deployment for the Connections API
+9. `kubectl apply -f deployment/udaconnect-app.yaml` - Set up the service and deployment for the web app
+10. `sh scripts/run_db_command.sh <POD_NAME>` - Seed your database against the `postgres` pod. (`kubectl get pods` will give you the `POD_NAME`)
+
+Manually applying each of the individual `yaml` files is cumbersome but going through each step provides some context on the content of the starter project. In practice, we would have reduced the number of steps by running the command against a directory to apply of the contents: `kubectl apply -f deployment/`.
+
+Note: The first time you run this project, you will need to seed the database with dummy data. Use the command `sh scripts/run_db_command.sh <POD_NAME>` against the `postgres` pod. (`kubectl get pods` will give you the `POD_NAME`). Subsequent runs of `kubectl apply` for making changes to deployments or services shouldn't require you to seed the database again!
+
+### Verifying it Works
+Once the project is up and running, you should be able to see 3 deployments and 3 services in Kubernetes:
+`kubectl get pods` and `kubectl get services` - should both return `udaconnect-app`, `udaconnect-api`, and `postgres`
+
+
+These pages should also load on your web browser:
+* `http://localhost:30010/` - OpenAPI Documentation
+* `http://localhost:30010/api/` - Base path for API
+* `http://localhost:30010/api/persons` - Get all persons
+* `http://localhost:30010/api/persons/{person_id}` - Get specific person with id
+* `http://localhost:30030/api/persons/{person_id}/connection` - Get connections via geolocation
+* `http://localhost:30000/` - Frontend ReactJS Application
+
 ## Overview
 ### Background
 Conferences and conventions are hotspots for making connections. Professionals in attendance often share the same interests and can make valuable business and personal connections with one another. At the same time, these events draw a large crowd and it's often hard to make these connections in the midst of all of these events' excitement and energy. To help attendees make connections, we are building the infrastructure for a service that can inform attendees if they have attended the same booths and presentations at an event.
