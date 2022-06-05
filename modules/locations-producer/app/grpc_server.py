@@ -27,7 +27,7 @@ class LocationServicer(locations_pb2_grpc.LocationServiceServicer):
 time.sleep(15)
 
 TOPIC_NAME = "location-processing"
-KAFKA_SERVER = 'kafka-0.default.svc.cluster.local:9092'
+KAFKA_SERVER = "kafka-0.default.svc.cluster.local:9092"
 
 print("Connecting to Kafka server: " + KAFKA_SERVER)
 print("Sending message Kafka topic: " + TOPIC_NAME)
@@ -38,7 +38,7 @@ server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
 locations_pb2_grpc.add_LocationServiceServicer_to_server(
     LocationServiceServicer(), server)
 
-print('gRPC Server starting on port 5000')
-server.add_insecure_port('[::]:5000')
+print('gRPC Server starting on port 5001')
+server.add_insecure_port('[::]:5001')
 server.start()
 server.wait_for_termination()
