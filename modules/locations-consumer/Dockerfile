@@ -12,4 +12,4 @@ EXPOSE 9093
 
 COPY . .
 
-ENTRYPOINT [ "python", "location_processor_service.py" ]
+ENTRYPOINT [ "python", "location_consumer.py" ]
