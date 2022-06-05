@@ -1,0 +1,11 @@
+Architecture Design Decisions
+
+1. Persons API and Connections API
+Both services are based on RESTful web services architecture, that allows Frontend app get the data
+via HTTP methods
+
+2. Locations service
+Assume that clients allow to use their geolocation. The Locations service is separate into 2 parts
+- Locations producer: This service use location data along with the person_id produces the message
+  using Kafka messaging service.
+- Location consumer: Consumes the data that produces by the producer then save the data to the database.

@@ -1,0 +1,17 @@
+## GRPC for Location producer service. ##
+
+See details in modules/location-producer for example how to send sample data
+The grpc_client.py will send request to location producer service through Protobuf message 
+gRPC will transfer data that is structured as the following in locations.proto file.
+
+syntax = "proto3";
+
+message Location {
+  string  person_id = 1;
+  float    latitude = 2;
+  float    longitude = 3;
+}
+
+service LocationService {
+  rpc Create(Location) returns (Location);
+}
