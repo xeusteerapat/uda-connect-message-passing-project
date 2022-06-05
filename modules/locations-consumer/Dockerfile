@@ -1,7 +1,6 @@
-FROM python:3.9-alpine
-RUN mkdir /backend
+FROM python:3.9-slim
 
-WORKDIR /backend
+WORKDIR .
 
 RUN apk add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev
 
