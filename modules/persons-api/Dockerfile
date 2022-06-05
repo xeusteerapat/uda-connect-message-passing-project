@@ -2,7 +2,12 @@ FROM python:3.9-slim
 
 WORKDIR .
 
-RUN apt add --no-cache gcc musl-dev linux-headers geos libc-dev postgresql-dev
+RUN apt-get update && apt-get install gcc \
+  musl-dev \
+  linux-headers \
+  geos \
+  libc-dev \
+  postgresql-dev
 
 COPY requirements.txt requirements.txt
 RUN pip install --upgrade pip && \
