@@ -2,45 +2,45 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: udaconnect-locations-producer
-  name: udaconnect-locations-producer
+    service: udaconnect-connections-api
+  name: udaconnect-connections-api
 spec:
   ports:
-  - name: "5001"
-    port: 5001
-    targetPort: 5001
-    nodePort: 30020
+  - name: "5002"
+    port: 5002
+    targetPort: 5002
+    nodePort: 30030
   selector:
-    service: udaconnect-locations-producer
+    service: udaconnect-connections-api
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: udaconnect-locations-producer
-  name: udaconnect-locations-producer
+    service: udaconnect-connections-api
+  name: udaconnect-connections-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: udaconnect-locations-producer
+      service: udaconnect-connections-api
   template:
     metadata:
       labels:
-        service: udaconnect-locations-producer
+        service: udaconnect-connections-api
     spec:
       containers:
-      - image: xeusteerapat/udaconnect-locations-producer:latest
-        name: udaconnect-locations-producer
+      - image: xeusteerapat/udaconnect-connections-api:latest
+        name: udaconnect-connections-api
         imagePullPolicy: Always
         resources:
-          requests:
-            memory: "128Mi"
-            cpu: "64m"
-          limits:
-            memory: "256Mi"
-            cpu: "128m"
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 410m
+              memory: 512Mi
         env: # refer to config.py file
         - name: DB_USERNAME
           valueFrom:
@@ -68,4 +68,4 @@ spec:
               name: db-env
               key: DB_PORT
       restartPolicy: Always
-          
+        
